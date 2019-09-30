@@ -1,0 +1,28 @@
+body{
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+
+.oneSize{
+  position: absolute;
+  border: 1px solid rgba(0,0,0,0.2);
+  box-sizing: border-box;
+  border-radius: 3px;
+  opacity: 1;
+}
+.oneSize.offHighlight{
+  opacity: 0.2;
+}
+.oneSize.highlight{
+  border-width: 6px;
+}
+#mattressContainer{
+  position: relative;
+  width: 300px;
+}
+#listing{
+  position: relative;
+  left: 300px;
+}
+.listing{
+  list-style-type: none;
+}

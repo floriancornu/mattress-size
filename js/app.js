@@ -182,7 +182,7 @@ function highlightOne( targetId ){
       oneSize.classList.add( 'offHighlight' )
     }else{
       oneSize.classList.add( 'highlight' )
-      oneSize.innerText = mattressSizeText( elementData )
+      oneSize.innerHTML = elementData.size + '<br>' + mattressSizeText( elementData )
     }
   } )
 }

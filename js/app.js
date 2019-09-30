@@ -92,21 +92,26 @@ let typeListingElement = document.querySelector( '#type' )
 let createdGeo = []
 let createdType = []
 
+let mattressMax = {
+  sizeWidth: false,
+  sizeLength: false
+}
 // Create list of mattress
 mattress.forEach( function( oneData ){
-  console.log( oneData )
   let elementId = oneData.size.replace( ' ', '.' )
   oneData.elementId = elementId
 
   let thisMattress = document.createElement( 'div' )
   thisMattress.classList.add( 'oneSize' )
+  thisMattress.classList.add( 'FBbox' )
+  thisMattress.classList.add( 'FBboxAlignCenter' )
+  thisMattress.classList.add( 'FBboxJustifyCenter' )
   thisMattress.classList.add( elementId )
   thisMattress.setAttribute( 'geo', oneData.geo )
   thisMattress.setAttribute( 'type', oneData.type )
   thisMattress.style.width = oneData.sizeWidth + 'px'
   thisMattress.style.height = oneData.sizeLength + 'px'
   thisMattress.style.backgroundColor = oneData.color
-  console.log( thisMattress )
   containerElement.appendChild( thisMattress )
 
   let thisListing = document.createElement( 'li' )
@@ -114,6 +119,11 @@ mattress.forEach( function( oneData ){
   thisListing.setAttribute( 'mattressId', elementId )
   thisListing.innerText = oneData.size.replace( '-', ' ' ) + ' ' + mattressSizeText( oneData )
   listingElement.appendChild( thisListing )
+
+  // Adjust container size Data
+  if( !mattressMax.sizeWidth || mattressMax.sizeWidth < oneData.sizeWidth ) mattressMax.sizeWidth = oneData.sizeWidth
+  if( !mattressMax.sizeLength || mattressMax.sizeLength < oneData.sizeLength ) mattressMax.sizeLength = oneData.sizeLength
+
 
   // Create Geo Listing
   if( !createdGeo.includes( oneData.geo ) ){
@@ -134,11 +144,10 @@ mattress.forEach( function( oneData ){
     thisType.innerText = oneData.type
     typeListingElement.appendChild( thisType )
   }
-
-
-
 } )
-
+// Adjust container size
+containerElement.style.width = mattressMax.sizeWidth + 'px'
+containerElement.style.height = mattressMax.sizeLength + 'px'
 
 // Selector of mattress
 let listingElements = document.querySelectorAll( '#listing li' )

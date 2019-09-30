@@ -1,0 +1,206 @@
+
+/* 
+- Aug 27th, 2019: 
+add 
+.FBboxJustifyCenter
+.FBboxAlignFullSize
+.FBchildBasisContent
+.FBboxWrap
+
+  Framework layout for full page
+  .flContainer: Full Layout
+
+  .FBbox PARENT FLEXBOX:
+  - display: flex
+  - flex-direction: column, row, column-reverse, row-reverse
+  - flex-wrap: nowrap, wrap
+  - flex-flow: <flex-direction> <flex-wrap>
+
+  flexbox elements alignment: set at the parent element
+  - justify-content: flex-start (default), flex-end, center, space-between, space-around, space-evenly // Along the main axis
+  
+  - align-items: stretch (default), flex-start, flex-end, center // Along the cross axis (ie. the perpendicular to the flex-direction) // Modify at item level with align-self
+  - align-content: // space between elements when bigger than parent
+  
+
+
+  FLEXBOX CHILDREN elements:
+  - flex-basis: auto (size of the content + free space allocation), 0 (space proportional allocation)
+  - flex-grow: proportional growth of element within available space (ie element with no flex-grow will take the space they need, and others will be prorata within themselves)
+  - flex-shrink
+  - flex: <flex-grow> <flex-shrink> <flex-basis>
+  - align-self: align at the item level
+
+*/
+
+/* 
+  Set a full screen layout
+  Needs to be at the root of the document
+*/
+.flContainer{
+  height: 100%;
+  width: 100%;
+
+  /* Takes the full page */
+  position: fixed;
+}
+
+/* Flexbox */
+.FBbox{
+  display: flex;
+}
+.FBboxVertical{
+  flex-direction: column;
+}
+.FBboxHorizontal{
+  flex-direction: row; /* Default flex-direction */
+}
+.FBboxWrap{
+  flex-wrap: wrap;
+}
+
+/* Within the main flexbox direction, positioning should the box child not take up the full space */
+.FBboxJustifySpread{
+  justify-content: space-evenly;
+}
+.FBboxJustifyStart{
+  justify-content: flex-start;
+}
+.FBboxJustifyCenter{
+  justify-content: center;
+}
+.FBboxJustifyEnd{
+  justify-content: flex-end;
+}
+
+/* Across the flexbox cross axis (ie perpendicular) */
+.FBboxAlignCenter{
+  align-items: center;
+}
+.FBboxAlignStart{
+  align-items: flex-start;
+}
+.FBboxAlignEnd{
+  align-items: flex-end;
+}
+.FBboxAlignFullSize{
+  align-items: stretch; /* Fills the cross axis */
+}
+.FBboxAlignBaseline{
+  align-items: baseline; /* aligns without margins messing up */
+}
+
+.FBboxWrap{
+  flex-wrap: wrap;
+}
+
+
+
+/* Children of the flexbox */
+.FBchild{
+  /* border: 1px solid red; */
+
+  /* Avoid oversize */
+  max-width: 100%;
+  max-height: 100%;
+
+  /* Adjust flex-grow size without consideration of element content size */
+  flex-basis: 0;
+
+  /* Animate change */
+  transition: 0.3s;
+
+  /* position: relative; */
+}
+.FBchildBasisContent{
+  flex-basis: auto;
+}
+
+/* .FBchild100Height{
+  height: 100%;
+  position: relative;
+} */
+
+
+.FBchildSizeEqual{
+  /* flex-basis auto means the FREE space is allocated afterwards */
+  /* flex: 1 1 auto; */
+
+  /* flex-basis 0 means the content of the element does not impact its size, spread with the flex-grow proportion */
+  flex: 1 1 0;
+}
+.FBchildSizeContent{
+  flex: 0 1 auto;
+}
+
+
+
+/* Override element align */
+.FBchildAlignStretch{
+  align-self: stretch;
+}
+.FBchildAlignCenter{
+  align-self: center;
+}
+
+/* Proportional growth within free space */
+.FBchildGrow1{
+  flex-grow: 1!important;
+}
+.FBchildGrow2{
+  flex-grow: 2!important;
+}
+
+.FBchildVerticalScroll{
+  /* Should the row become higher than space it should, it will scroll */
+  overflow-y: scroll;
+}
+
+
+.flContentBox{
+  margin: 12px;
+}
+
+
+
+/* Table */
+.TLvalueColumn{
+  text-align: right;
+  overflow: hidden; /* avoids move of column width */
+}
+
+.TLvalueColumn.TLheaderGroup:not(:last-child) {
+  border-right: 0.2px solid rgba(0,0,0,0.1);
+}
+.TLheaderGroup{
+  text-align: center!important;
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
+
+.TLvalueColumn.TLheader:not(:last-child) {
+  border-right: 0.2px solid rgba(0,0,0,0.1);
+}
+
+.TLheader{
+  margin-bottom: 9px;
+  font-weight: bold;
+}
+
+.TLcellInside{
+  padding: 0.1vw;
+  /* padding: 2px; */
+}
+
+.TLcontent .TLcellInside{
+  white-space: nowrap;
+}
+
+
+
+/* Class for testing */
+.flex-big-content{
+  width: 2000px;
+  height: 2000px;
+}
